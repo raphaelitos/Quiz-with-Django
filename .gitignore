@@ -1,0 +1,18 @@
+# Arquivos de configuração do sistema
+.DS_Store
+Thumbs.db
+
+# Ambiente Virtual
+venv/
+
+# Arquivos de compilação Vue.js
+/node_modules/
+
+# Arquivos de configuração do ambiente
+.env
+
+# Arquivos temporários
+*.tmp
+
+# Arquivos de mídia
+media/
