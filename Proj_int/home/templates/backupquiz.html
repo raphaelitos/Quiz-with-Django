@@ -12,21 +12,14 @@
       <div class="container mt-5 pt-5">
         <div class="col-md-6 mx-auto">
           <h3>Responda ao Quiz</h3>
-          <div v-if="timeRemaining > 0">
-            <p>Tempo restante: [[ Math.floor(timeRemaining / 60) ]]:[[ ('0' + timeRemaining % 60).slice(-2) ]]</p>
-          </div>
-          <div v-else>
-            <p>O tempo acabou!</p>
-            <p>As respostas não serão mais aceitas.</p>
-          </div>
-        
-          <div v-for="question in questions" :key="question.uid">
+          <hr>
+          <div v-for="question in questions">
             <p>[[question.question]]</p>
-            <div class="form-check" v-for="answer in question.answers" :key="answer.answer">
-                <input @change="checkAnswer($event, question.uid)" :value="answer.answer" class="form-check-input" type="radio" :name="'flexRadioDefault_' + question.uid" :id="'flexRadioDefault_' + question.uid + '_' + answer.answer" :disabled="timeRemaining <= 0">
-                <label :for="'flexRadioDefault_' + question.uid + '_' + answer.answer" class="form-check-label">
-                    [[answer.answer]]
-                </label>
+            <div class="form-check" v-for="answer in question.answers">
+              <input @change="checkAnswer($event, question.uid)" :value="answer.answer" class="form-check-input" type="radio" :name="'flexRadioDefault_' + question.uid" :id="'flexRadioDefault_' + question.uid + '_' + answer.answer">
+              <label :for="'flexRadioDefault_' + question.uid + '_' + answer.answer" class="form-check-label">
+                [[answer.answer]]
+              </label>
             </div>
             <hr>
           </div>
@@ -42,8 +35,7 @@
         data(){
           return{
             category: '{{category}}',
-            questions: [],
-            timeRemaining: 70, // tempo em segundos
+            questions: []
           }
         },
         methods: {
@@ -57,12 +49,6 @@
             })
           },
           checkAnswer(event, uid){
-            
-            if (this.timeRemaining <= 0) {
-              console.log('Tempo esgotado! As respostas não serão mais aceitas.');
-              alert('Seu tempo acabou.')
-              return;
-            }
             
             this.questions.map(question =>{
               answers = question.answers
@@ -79,18 +65,13 @@
                 }
               }
             })
-          },
+
+            console.log(event.target.value, uid)
+          }
         },
         created(){
           this.getQuestions()
-          console.log('Página carregada')
-
-          // Configurar um intervalo para atualizar o cronômetro a cada segundo
-          setInterval(() => {
-            if (this.timeRemaining > 0) {
-                this.timeRemaining -= 1;
-            }
-          }, 1000);
+          console.log('Page Loaded')
         },
       });
     </script>

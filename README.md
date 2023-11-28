@@ -10,8 +10,9 @@ Este é um projeto básico de quiz desenvolvido com Django e Vue.js. O aplicativ
     cd django-quiz-app
     ```
 
-**Ative o Ambiente Virtual:**
+**Crie e Ative o Ambiente Virtual:**
     ```bash
+    python -m venv venv
     # No Windows:
     venv\Scripts\activate
     # No macOS e Linux:
